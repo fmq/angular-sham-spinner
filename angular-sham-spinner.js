@@ -111,7 +111,7 @@ app.factory('AngularShamNotification', ['$rootScope', '$timeout', function($root
         setDisabled: function(disable, resetTime) {
             _disabled = disable;
             if (_disabled) {
-                this.requestEnded();
+                //this.requestEnded();
                 if (resetTime > 0) {
                     if (_lastTimeout !== null) {
                         $timeout.cancel(_lastTimeout);
