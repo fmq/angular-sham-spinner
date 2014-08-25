@@ -27,9 +27,18 @@ app.factory('AngularShamInterceptor', [
                 // send notification requests are complete
                 angularShamNotification.requestEnded();
             }
+            else if (_http.pendingRequests.length === 1) {
+                // ignore messages requests
+                if(_http.pendingRequests[0] && 
+                _http.pendingRequests[0].url.indexOf('/curiman-api/mensajes/') > -1) {
+					angularShamNotification.requestEnded();
+				}
+            }
         };
         return {
             request: function(config) {
+				if(config.url && config.url.indexOf('/curiman-api/mensajes/') > -1)
+					return config;
                 angularShamNotification.requestStarted();
                 return config;
             },
